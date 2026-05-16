@@ -15,7 +15,7 @@ For most of my career the PM job was a translation job: idea → spec → ticket
 
 - **Network Intelligence Layer** — interactive graph + reasoning layer over a 300+ piece corpus. Same dataset as everyone else in the room; the angle was the differentiator. [Live](https://beneath-the-org-chart.replit.app) · [Code](https://github.com/iancowpar/lennys-contest)
 - **Round Two** — collapses a dependency: a worksheet generator with SymPy-verified math that hands teachers their time back. Real users, today. [Live](https://round-two.streamlit.app) · [Code](https://github.com/iancowpar/worksheet-generator)
-- **Cold Open** — a warm-path job-search tool for senior PMs. Your context is the moat. [Live](https://cold-open.netlify.app) · [Code](https://github.com/iancowpar/agent-kairova)
+- **Cold Open** — a warm-path job-search tool for senior PMs. Your context is the moat. [Live](https://cold-open.netlify.app) · [Code](https://github.com/iancowpar/cold-open)
 - **This site** — hand-built, no template, no framework. The proof of the thesis it argues. [Live](https://iancowpar.github.io) · [Code](https://github.com/iancowpar/iancowpar.github.io)
 
 ### I lead people, not just builds
