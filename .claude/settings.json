@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(date:*)",
+      "Bash(find inbox -type f:*)",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__list_calendars",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__list_events",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__get_event",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__suggest_time",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__create_event",
+      "mcp__9b91dd0d-6852-44ef-88c2-eaaca00cd66d__search_threads",
+      "mcp__9b91dd0d-6852-44ef-88c2-eaaca00cd66d__get_thread",
+      "mcp__9b91dd0d-6852-44ef-88c2-eaaca00cd66d__list_labels",
+      "mcp__9b91dd0d-6852-44ef-88c2-eaaca00cd66d__create_draft"
+    ],
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "mcp__9b91dd0d-6852-44ef-88c2-eaaca00cd66d__delete_label",
+      "mcp__70ed4b5d-7a38-4537-ae24-04073ee0eefe__delete_event"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+# Personal content — never commit
+daily/**/*.md
+weekly/*.md
+inbox/*.md
+notes/*.md
+reading/*.md
+
+# Keep the directory structure
+!**/.gitkeep
+
+# Local Claude settings (per-machine overrides, secrets)
+.claude/settings.local.json
+.claude/.credentials.json
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.vscode/
+.idea/
