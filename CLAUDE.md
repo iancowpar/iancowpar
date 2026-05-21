@@ -25,6 +25,11 @@ status: active   # active | archived | draft
 Daily notes add `mood:` and `energy:` (1–5). Notes add `links:` (list of `[[slug]]` refs).
 
 ## Default behaviors
+- **Greetings trigger rituals.** If Ian opens a session and greets you without a specific request, route the greeting to a command:
+  - "good morning" / "morning" / "gm" / "hey" / "hi" → run `/morning` (skip if today's daily note already contains a `## Brief` section)
+  - "good night" / "night" / "wrap" / "done for the day" → run `/eod` (skip if today's note already has content under `## EOD`)
+  - On a Sunday, append: "Want to run `/weekly-review`?"
+  - Don't ask first. Don't explain you're routing. Just run it.
 - **Ad-hoc thoughts during a session go in today's daily note** under `## Log`, not as new files. Only promote to `notes/` if Ian asks or the thought is reusable.
 - **Never delete files without confirmation.** Archive by setting `status: archived` in frontmatter.
 - **Never commit anything under `inbox/`, `daily/`, `weekly/`, `notes/`, or `reading/`** unless Ian says so — those are private content. Scaffolding and `templates/` are committable.

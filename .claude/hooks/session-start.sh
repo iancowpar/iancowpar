@@ -28,9 +28,25 @@ if [ -d weekly ]; then
   LATEST_WEEKLY=$(ls -1 weekly/*.md 2>/dev/null | sort | tail -n 1 || true)
 fi
 
+BRIEF_DONE="no"
+EOD_DONE="no"
+if [ -f "${DAILY_FILE}" ]; then
+  grep -q '^## Brief' "${DAILY_FILE}" && BRIEF_DONE="yes"
+  awk '/^## EOD/{flag=1;next} /^## /{flag=0} flag && NF{found=1} END{exit !found}' "${DAILY_FILE}" && EOD_DONE="yes"
+fi
+
+DOW=$(date +%u)
+SUNDAY_HINT=""
+if [ "${DOW}" = "7" ]; then
+  SUNDAY_HINT=" — it's Sunday; offer /weekly-review"
+fi
+
 echo "=== Personal OS — session context ==="
-echo "Date:           ${TODAY} (${WEEK})"
+echo "Date:           ${TODAY} (${WEEK})${SUNDAY_HINT}"
 echo "Today's note:   ${DAILY_FILE}"
+echo "Brief done:     ${BRIEF_DONE}"
+echo "EOD done:       ${EOD_DONE}"
 echo "Inbox items:    ${INBOX_COUNT}"
 echo "Latest weekly:  ${LATEST_WEEKLY:-none}"
-echo "Run /morning to load calendar + email into today's brief."
+echo ""
+echo "Routing (see CLAUDE.md): greet 'good morning' → /morning (if brief not done); 'good night' → /eod (if EOD not done)."
