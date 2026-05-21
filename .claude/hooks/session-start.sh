@@ -42,21 +42,36 @@ if [ "${DOW}" = "7" ]; then
 fi
 
 echo "=== Personal OS — session context ==="
-echo "Date:           ${TODAY} (${WEEK})${SUNDAY_HINT}"
-echo "Today's note:   ${DAILY_FILE}"
-echo "Brief done:     ${BRIEF_DONE}"
-echo "EOD done:       ${EOD_DONE}"
-echo "Inbox items:    ${INBOX_COUNT}"
-echo "Latest weekly:  ${LATEST_WEEKLY:-none}"
+echo "Date:    ${TODAY} (${WEEK})${SUNDAY_HINT}"
+echo "State:   brief=${BRIEF_DONE} · eod=${EOD_DONE} · inbox=${INBOX_COUNT}"
+
+if [ "${INBOX_COUNT}" -gt 0 ]; then
+  echo ""
+  echo "Inbox (untriaged):"
+  find inbox -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort | while read -r f; do
+    echo "  · $(basename "$f" .md)"
+  done
+fi
+
+if [ -f "${DAILY_FILE}" ]; then
+  PLAN_LINES=$(awk '/^## Plan/{flag=1;next} /^## /{flag=0} flag && NF' "${DAILY_FILE}")
+  if [ -n "${PLAN_LINES}" ]; then
+    echo ""
+    echo "Today's plan:"
+    echo "${PLAN_LINES}" | sed 's/^/  /'
+  fi
+fi
+
 echo ""
 echo "INSTRUCTIONS FOR CLAUDE:"
 if [ "${BRIEF_DONE}" = "no" ]; then
-  echo "- If Ian's first message is a greeting (morning/hi/hey/gm/hello), DO NOT ASK — immediately read .claude/commands/morning.md and execute it."
+  echo "- If Ian's first message is a greeting (morning/hi/hey/gm/hello), DO NOT ASK — immediately read .claude/commands/morning.md and execute it. Render the brief in chat."
 fi
 if [ "${EOD_DONE}" = "no" ]; then
-  echo "- If Ian's first message is an end-of-day greeting (night/wrap/eod/done), DO NOT ASK — immediately read .claude/commands/eod.md and execute it."
+  echo "- If Ian's first message is an end-of-day greeting (night/wrap/eod/done), DO NOT ASK — immediately read .claude/commands/eod.md and execute it. Render the reflection in chat."
 fi
 if [ "${DOW}" = "7" ]; then
   echo "- It's Sunday: after the morning ritual, ask if Ian wants to run /weekly-review."
 fi
-echo "- See CLAUDE.md for the full greeting → ritual table."
+echo "- Always deliver results in the chat. Never tell Ian to open a file."
+echo "- Stage + commit + push silently at the end of every ritual. Git stays invisible unless it errors."

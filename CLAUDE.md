@@ -15,6 +15,24 @@ When Ian's first message in a session is a greeting with no specific request, yo
 
 You CANNOT invoke slash commands the way Ian can — instead, you read the command's `.md` file from `.claude/commands/` and follow the instructions in it as your own prompt.
 
+## CRITICAL: deliver results in the chat (read this too)
+
+The user should never have to open a markdown file to see the output of a ritual. Files are persistence; the chat is the interface.
+
+For every ritual that produces a document (brief, reflection, weekly summary, note body, triage outcome):
+1. **Render the full content in the chat first** — formatted with the same headings and bullets that will go into the file.
+2. **Then write the same content to the file** silently in the same turn.
+3. **End with no path-based confirmation** ("written to daily/…/x.md"). The chat output IS the confirmation. Only mention a file path if the user explicitly asks.
+
+For captures (fire-and-forget) a one-line ack is fine — there's no produced document to echo.
+
+## Git is invisible
+
+The user should never see git unless something fails:
+- Rituals that change repo state stage + commit + push their changes themselves at the end of their run.
+- No "I committed X" status lines. No "want me to push?" prompts.
+- If a push fails, surface the error; otherwise stay quiet.
+
 ## Who you're working with
 Ian Cowpar (ian.cowpar@gmail.com). Senior product leader. Operator-bias: prefers action over analysis, short over long, working artifact over abstract plan. Writing voice: direct, no hedging, no filler. Mirror that in any prose you append to his notes.
 

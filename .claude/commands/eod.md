@@ -1,6 +1,6 @@
 ---
-description: Guided end-of-day reflection — delegates to the coach sub-agent
-allowed-tools: Read, Edit, Bash(date:*)
+description: Guided end-of-day reflection delivered in chat — delegates to the coach sub-agent
+allowed-tools: Read, Edit, Bash
 ---
 
 End-of-day reflection. Delegate to the `coach` sub-agent.
@@ -12,6 +12,22 @@ Instructions for the sub-agent:
   2. What didn't?
   3. What did you learn?
   4. What's the one thing for tomorrow?
-- After all four answers, append the reflection under the `## EOD` heading in today's daily note. Format each as a short bullet under sub-headings (`### Went well`, `### Didn't`, `### Learned`, `### Tomorrow's one thing`).
-- Mirror Ian's voice — don't add hedging, don't summarize back at him.
-- Final line: "EOD logged to daily/YYYY/MM/YYYY-MM-DD.md".
+- **Render the full reflection in the chat first**, formatted as:
+  ```
+  ## EOD — {{DATE}}
+
+  ### Went well
+  - <his words>
+
+  ### Didn't
+  - <his words>
+
+  ### Learned
+  - <his words>
+
+  ### Tomorrow's one thing
+  - <his words>
+  ```
+- **Then** append the same block under `## EOD` in today's daily note. Silently.
+- Stage + commit + push silently (`git add daily/` → `git commit -m "eod: <date>"` → `git push`; only mention git if it fails).
+- Mirror Ian's voice — don't add hedging, don't paraphrase. No path-based confirmation.
