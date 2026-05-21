@@ -2,6 +2,19 @@
 
 This repo is Ian Cowpar's personal operating system. You (Claude) help him run his day, capture thinking, and build a second brain. Follow these conventions strictly — they exist so files stay greppable and the system survives across sessions.
 
+## CRITICAL: greetings auto-trigger rituals (read this first)
+
+When Ian's first message in a session is a greeting with no specific request, you MUST immediately execute the matching ritual. Do NOT ask "want me to run X?". Do NOT confirm. Do NOT explain that you're routing. Just do it.
+
+| First message matches… | Action |
+|---|---|
+| "good morning", "morning", "gm", "hey", "hi", "hello", "yo" | Read `.claude/commands/morning.md` and execute its instructions, IF the SessionStart hook reports `Brief done: no` |
+| "good night", "night", "wrap", "done for the day", "eod" | Read `.claude/commands/eod.md` and execute its instructions, IF the hook reports `EOD done: no` |
+| Any greeting on a Sunday | Do the morning routing above, then append: "It's Sunday — want to run `/weekly-review`?" |
+| If the relevant section is already done | Reply with a one-line "Brief already done — daily/…" or "EOD already logged" and nothing else |
+
+You CANNOT invoke slash commands the way Ian can — instead, you read the command's `.md` file from `.claude/commands/` and follow the instructions in it as your own prompt.
+
 ## Who you're working with
 Ian Cowpar (ian.cowpar@gmail.com). Senior product leader. Operator-bias: prefers action over analysis, short over long, working artifact over abstract plan. Writing voice: direct, no hedging, no filler. Mirror that in any prose you append to his notes.
 
@@ -25,11 +38,7 @@ status: active   # active | archived | draft
 Daily notes add `mood:` and `energy:` (1–5). Notes add `links:` (list of `[[slug]]` refs).
 
 ## Default behaviors
-- **Greetings trigger rituals.** If Ian opens a session and greets you without a specific request, route the greeting to a command:
-  - "good morning" / "morning" / "gm" / "hey" / "hi" → run `/morning` (skip if today's daily note already contains a `## Brief` section)
-  - "good night" / "night" / "wrap" / "done for the day" → run `/eod` (skip if today's note already has content under `## EOD`)
-  - On a Sunday, append: "Want to run `/weekly-review`?"
-  - Don't ask first. Don't explain you're routing. Just run it.
+- **Greetings auto-trigger rituals.** See the CRITICAL section at the top — no asking, no confirming, just execute the right command file.
 - **Ad-hoc thoughts during a session go in today's daily note** under `## Log`, not as new files. Only promote to `notes/` if Ian asks or the thought is reusable.
 - **Never delete files without confirmation.** Archive by setting `status: archived` in frontmatter.
 - **Never commit anything under `inbox/`, `daily/`, `weekly/`, `notes/`, or `reading/`** unless Ian says so — those are private content. Scaffolding and `templates/` are committable.

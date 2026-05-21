@@ -49,4 +49,14 @@ echo "EOD done:       ${EOD_DONE}"
 echo "Inbox items:    ${INBOX_COUNT}"
 echo "Latest weekly:  ${LATEST_WEEKLY:-none}"
 echo ""
-echo "Routing (see CLAUDE.md): greet 'good morning' → /morning (if brief not done); 'good night' → /eod (if EOD not done)."
+echo "INSTRUCTIONS FOR CLAUDE:"
+if [ "${BRIEF_DONE}" = "no" ]; then
+  echo "- If Ian's first message is a greeting (morning/hi/hey/gm/hello), DO NOT ASK — immediately read .claude/commands/morning.md and execute it."
+fi
+if [ "${EOD_DONE}" = "no" ]; then
+  echo "- If Ian's first message is an end-of-day greeting (night/wrap/eod/done), DO NOT ASK — immediately read .claude/commands/eod.md and execute it."
+fi
+if [ "${DOW}" = "7" ]; then
+  echo "- It's Sunday: after the morning ritual, ask if Ian wants to run /weekly-review."
+fi
+echo "- See CLAUDE.md for the full greeting → ritual table."
